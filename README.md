@@ -4,14 +4,14 @@ A FastAPI-based microservice that integrates with the Genderize API to provide p
 
 ## Public API URL
 
-[Insert your Railway/Vercel URL here, e.g., https://your-app.up.railway.app]
+[https://stage0-1z9av4d3i-aghoghos-projects.vercel.app]
 
 ## Tech Stack
 
-- **Language:** Python 3.10+
+- **Language:** Python 3.14
 - **Framework:** FastAPI
-- **HTTP Client:** HTTPX (Asynchronous)
-- **Deployment:** Railway / Vercel
+- **HTTP Client:** HTTPX 
+- **Deployment:** Vercel
 
 ## API Specification
 
