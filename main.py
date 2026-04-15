@@ -50,8 +50,8 @@ async def classify_name(name: str = Query(None)):
             data = response.json()
 
         gender = data.get("gender")
-        sample_size = data.get("count", 0)
-        probability = data.get("probability", 0.0)
+        probability = float(data.get("probability") or 0.0)
+        sample_size = int(data.get("count") or 0)
 
         
         if gender is None or sample_size == 0:
@@ -60,7 +60,8 @@ async def classify_name(name: str = Query(None)):
                 content={"status": "error", "message": "No prediction available for the provided name"}
             )
 
-        is_confident = (probability >= 0.7) # and (sample_size >= 100)
+        
+        is_confident = (probability >= 0.7) and (sample_size >= 100)
 
         return {
             "status": "success",
