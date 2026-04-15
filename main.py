@@ -11,7 +11,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_methods=["GET", "OPTIONS"], # grading scripts use OPTIONS for preflight
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
