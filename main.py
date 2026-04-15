@@ -60,7 +60,7 @@ async def classify_name(name: str = Query(None)):
                 content={"status": "error", "message": "No prediction available for the provided name"}
             )
 
-        is_confident = (probability >= 0.7) and (sample_size >= 100)
+        is_confident = (probability >= 0.7) # and (sample_size >= 100)
 
         return {
             "status": "success",
