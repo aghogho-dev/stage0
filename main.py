@@ -7,27 +7,24 @@ from datetime import datetime, timezone
 
 app = FastAPI()
 
-# Requirement: Strict CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_methods=["*"],
+    allow_methods=["GET", "OPTIONS"], 
     allow_headers=["*"],
 )
 
-# Use env var if present, otherwise fallback to the hardcoded URL
 GENDERIZE_URL = os.getenv("GENDERIZE_URL", "https://api.genderize.io")
 
 @app.get("/api/classify")
 async def classify_name(name: str = Query(None)):
-    # 1. Validation: Missing, empty, or numeric strings
+
     if name is None or name.strip() == "":
         return JSONResponse(
             status_code=400,
             content={"status": "error", "message": "Missing or empty name"}
         )
     
-    # Check if the "name" is just numbers (common tester edge case)
     if name.isdigit():
         return JSONResponse(
             status_code=422,
@@ -50,17 +47,15 @@ async def classify_name(name: str = Query(None)):
         sample_size = data.get("count", 0)
         probability = data.get("probability", 0.0)
 
-        # 2. Edge Case: No prediction
+        
         if gender is None or sample_size == 0:
             return JSONResponse(
                 status_code=200, 
                 content={"status": "error", "message": "No prediction available for the provided name"}
             )
 
-        # 3. Confidence Logic: probability >= 0.7 AND sample_size >= 100
         is_confident = (probability >= 0.7) and (sample_size >= 100)
 
-        # 4. Success Response
         return {
             "status": "success",
             "data": {
