@@ -4,7 +4,7 @@ A FastAPI-based microservice that integrates with the Genderize API to provide p
 
 ## Public API URL
 
-[https://stage0-1z9av4d3i-aghoghos-projects.vercel.app]
+https://stage0-nine.vercel.app/
 
 ## Tech Stack
 
